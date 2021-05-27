@@ -1,3 +1,20 @@
+<?php
+session_start();
+session_regenerate_id(true);
+if(isset($_SESSION['login'])==false)
+{
+    print'ログインされていません。<br/>';
+    print'<a href="../staff_login/staff_login.html">ログイン画面へ</a>';
+    exit();
+}
+else
+{
+    print$_SESSION['staff_name'];
+    print'さんログイン中<br/>';
+    print'<br/>';
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +40,7 @@ $stmt->execute();
 
 $dbh = null;
 
-print'商品一覧<br/><br/>';
+print'商品一覧2<br/><br/>';
 
 print'<form method="post" action="pro_branch.php">';
 while(true)
@@ -51,6 +68,10 @@ catch(Exception $e)
 }
 
 ?>
+
+
+</br>
+<a href="../staff_login/staff_top.php">トップメニューへ</a><br/>
 
 </body>
 </html>

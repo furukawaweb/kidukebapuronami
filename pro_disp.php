@@ -1,3 +1,20 @@
+<?php
+session_start();
+session_regenerate_id(true);
+if(isset($_SESSION['login'])==false)
+{
+    print'ログインされていません。<br/>';
+    print'<a href="../staff_login/staff_login.html">ログイン画面へ</a>';
+    exit();
+}
+else
+{
+    print$_SESSION['staff_name'];
+    print'さんログイン中<br/>';
+    print'<br/>';
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +54,7 @@ if($pro_gazou_name=='')
 }
 else
 {
-    $disp_gazou='<img src="./gazou/7'.$pro_gazou_name.'">';
+    $disp_gazou='<img src="./gazou/'.$pro_gazou_name.'">';
 }
 
 }

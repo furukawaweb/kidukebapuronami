@@ -1,3 +1,20 @@
+<?php
+session_start();
+session_regenerate_id(true);
+if(isset($_SESSION['login'])==false)
+{
+    print'ログインされていません。<br/>';
+    print'<a href="../staff_login/staff_login.html">ログイン画面へ</a>';
+    exit();
+}
+else
+{
+    print$_SESSION['staff_name'];
+    print'さんログイン中<br/>';
+    print'<br/>';
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,12 +25,18 @@
 
 <?php
 
-$pro_name=$_POST['name'];
-$pro_price=$_POST['price'];
+require_once('../common/common.php');
+
+$pro_name=$post['name'];
+$pro_price=$post['price'];
 $pro_gazou=$_FILES['gazou'];
 
-$pro_name= htmlspecialchars($pro_name,ENT_QUOTES,'UTF-8');
-$pro_price= htmlspecialchars($pro_price,ENT_QUOTES,'UTF-8');
+print 'name : '.$pro_name;
+print'<br/>';
+print 'price : '.$pro_price;
+print'<br/>';
+print 'gazou : '.$pro_gazou;
+print'<br/>';
 
 if($pro_name=='')
 {
@@ -36,7 +59,8 @@ else
     print $pro_price;
     print'円<br/>';
 }
-
+print 'テスト';
+print $pro_gazou['size'];
 if($pro_gazou['size'] > 0)
 {
     if($pro_gazou['size'] > 1000000)
@@ -45,6 +69,8 @@ if($pro_gazou['size'] > 0)
     }
     else
     {
+        print $pro_gazou['tmp_name'];
+        print $pro_gazou['name'];
         move_uploaded_file($pro_gazou['tmp_name'],'./gazou/'.$pro_gazou['name']);
         print'<img src="./gazou/'.$pro_gazou['name'].'">';
         print'<br/>';
